@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/topGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@color/colorPrimary"
+            android:fitsSystemWindows="true"
+            app:columnCount="4"
+            app:orientation="vertical"
+            app:rowCount="2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_monetization_on_black_24dp"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="0"
+                app:layout_rowWeight="1" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_shopping_cart_black_24dp"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="1"
+                app:layout_rowWeight="1" />
+
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_column="1"
+                app:layout_columnWeight="2"
+                app:layout_row="0"
+                app:layout_rowWeight="2" />
+
+            <TextView
+                android:id="@+id/goalsPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="total price"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_column="1"
+                app:layout_columnWeight="2"
+                app:layout_row="1"
+                app:layout_rowWeight="2" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/amountInput"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:hint="0"
+                android:inputType="numberDecimal"
+                android:textColorHint="@android:color/white"
+                app:boxBackgroundColor="@color/colorPrimaryDark"
+                app:layout_column="2"
+                app:layout_columnSpan="2"
+                app:layout_columnWeight="2"
+                app:layout_row="0"
+                app:layout_rowWeight="3"
+
+                />
+
+            <ImageButton
+                android:id="@+id/addAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@color/colorPrimary"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_add_box"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
+
+
+            <ImageButton
+                android:id="@+id/subAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@color/colorPrimary"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_indeterminate_box"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
+
+        </androidx.gridlayout.widget.GridLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coord"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <!--            android:layout_gravity="clip_horizontal"-->
+            <!--            android:layout_marginBottom="?attr/actionBarSize"-->
+            <!--            app:layout_anchor="@+id/viewPager"-->
+            <!--            app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
+
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bottomBar"
+                style="@style/Widget.MaterialComponents.BottomAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabAlignmentMode="center"
+                app:fabCradleMargin="10dp"
+                app:fabCradleRoundedCornerRadius="10dp"
+                app:fabCradleVerticalOffset="5dp"
+                app:hideOnScroll="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:gravity="start"
+                        android:text="Savings"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:gravity="end"
+                        android:text="Goals"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.bottomappbar.BottomAppBar>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/bottomPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="bottom"
+                android:src="@drawable/plus_icon"
+                android:tint="@android:color/white"
+                app:fabSize="normal"
+                app:layout_anchor="@id/bottomBar"
+                app:maxImageSize="50dp" />
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/topGrid"
+            android:layout_marginBottom="?attr/actionBarSize"
+            tools:ignore="NotSibling,UnknownId" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
