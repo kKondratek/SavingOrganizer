@@ -1,6 +1,7 @@
 package com.kkondratek.savingapp;
 
 import android.content.SharedPreferences;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -20,7 +21,7 @@ public class BalanceController {
         balanceView.setText(balanceStr);
     }
 
-    public void addAmount(TextInputEditText value) {
+    public void addAmount(EditText value) {
         int newBalance;
         if (value.getText() == null) {
             newBalance = 0;
@@ -37,7 +38,7 @@ public class BalanceController {
 
     }
 
-    public void substractAmount(TextInputEditText value) {
+    public void substractAmount(EditText value) {
         int newBalance;
         if (value.getText() == null) {
             newBalance = 0;

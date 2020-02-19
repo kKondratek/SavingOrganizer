@@ -63,8 +63,8 @@
                 app:layout_row="1"
                 app:layout_rowWeight="2" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/amountInput"
+            <EditText
+                android:id="@+id/edit_text_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:hint="0"
@@ -144,7 +144,7 @@
                         android:gravity="start"
                         android:text="Savings"
                         android:textColor="#ffffff"
-                        android:textSize="20sp" />
+                        android:textSize="30sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -153,23 +153,19 @@
                         android:gravity="end"
                         android:text="Goals"
                         android:textColor="#ffffff"
-                        android:textSize="20sp" />
+                        android:textSize="30sp" />
 
                 </LinearLayout>
 
             </com.google.android.material.bottomappbar.BottomAppBar>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floating_button_add"
+                android:id="@+id/button_add_goal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:foregroundGravity="bottom"
-                android:src="@drawable/plus_icon"
-                android:tint="@android:color/white"
-                app:fabSize="normal"
-                app:layout_anchor="@id/bottomBar"
-                app:maxImageSize="50dp" />
-
+                android:src="@drawable/ic_plus"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="10dp"/>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

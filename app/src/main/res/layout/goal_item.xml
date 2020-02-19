@@ -1,78 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/text_view_name"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:text="Name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:maxLines="1"
-            android:layout_toStartOf="@id/text_view_price"
-            android:layout_toLeftOf="@id/text_view_price" />
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/text_view_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:maxLines="1"
+                android:layout_toStartOf="@id/text_view_price"
+                android:layout_toLeftOf="@id/text_view_price" />
 
 
-        <TextView
-            android:id="@+id/text_view_price"
+            <TextView
+                android:id="@+id/text_view_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="150 PLN"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                />
+
+            <TextView
+                android:id="@+id/text_view_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_view_name"
+                android:text="Some details"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:visibility="gone" />
+
+
+            <ImageButton
+                android:id="@+id/image_button_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_done_30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/text_view_details"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/image_button_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_up_30dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/text_view_details"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/image_button_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_down_30dp"
+                android:layout_toLeftOf="@id/image_button_up"
+                android:layout_below="@id/text_view_details"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_add_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="150 PLN"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            />
-
-        <TextView
-            android:id="@+id/text_view_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_name"
-            android:text="Some details"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:visibility="gone" />
+            android:src="@drawable/ic_plus"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="32dp"/>
 
 
-        <ImageButton
-            android:id="@+id/image_button_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_done_30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/text_view_details"
-            android:visibility="gone"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <ImageButton
-            android:id="@+id/image_button_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_up_30dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/text_view_details"
-            android:visibility="gone"/>
-
-        <ImageButton
-            android:id="@+id/image_button_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_down_30dp"
-            android:layout_toLeftOf="@id/image_button_up"
-            android:layout_below="@id/text_view_details"
-            android:visibility="gone" />
-
-    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

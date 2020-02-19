@@ -2,24 +2,18 @@ package com.kkondratek.savingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.ColumnInfo;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.FrameMetrics;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.kkondratek.savingapp.fragments.GoalsPageFragm;
 import com.kkondratek.savingapp.fragments.SavingsPageFragm;
 
@@ -68,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton addAmount = findViewById(R.id.addAmount);
         ImageButton substractAmount = findViewById(R.id.subAmount);
 
-        final TextInputEditText amountInput = (TextInputEditText) findViewById(R.id.amountInput);
+        final EditText amountInput = (EditText) findViewById(R.id.edit_text_amount);
 
         addAmount.setOnClickListener(new View.OnClickListener() {
             @Override
