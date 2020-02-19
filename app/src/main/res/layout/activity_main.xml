@@ -68,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:hint="0"
+                android:autofillHints="0"
                 android:inputType="numberDecimal"
                 android:textColorHint="@android:color/white"
                 app:boxBackgroundColor="@color/colorPrimaryDark"
@@ -76,7 +77,6 @@
                 app:layout_columnWeight="2"
                 app:layout_row="0"
                 app:layout_rowWeight="3"
-
                 />
 
             <ImageButton
@@ -160,7 +160,7 @@
             </com.google.android.material.bottomappbar.BottomAppBar>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/bottomPlus"
+                android:id="@+id/floating_button_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:foregroundGravity="bottom"

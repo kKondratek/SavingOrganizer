@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.ColumnInfo;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private BalanceController balanceController;
 
 
-//    private GoalViewModel goalViewModel;
 //    private SavingViewModel savingViewModel;
 
     @Override
@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         List<Fragment> pageList = new ArrayList<>();
-        pageList.add(new GoalsPageFragm());
-        pageList.add(new SavingsPageFragm());
+        GoalsPageFragm goalsPageFragm = new GoalsPageFragm();
+        SavingsPageFragm savingsPageFragm = new SavingsPageFragm();
+        pageList.add(savingsPageFragm);
+        pageList.add(goalsPageFragm);
 
         pager = findViewById(R.id.viewPager);
         pagerAdapter = new SlidePagerAdapter(getSupportFragmentManager(), pageList);
@@ -55,17 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         balanceController = new BalanceController(balanceView, balance);
 
-
-
-//        goalViewModel = ViewModelProviders.of(this).get(GoalViewModel.class);
 //        savingViewModel = ViewModelProviders.of(this).get(SavingViewModel.class);
-//        goalViewModel.getAllSavings().observe(this, new Observer<List<Goal>>() {
-//            @Override
-//            public void onChanged(List<Goal> goals) {
-//
-//            }
-//        });
-//
 //        savingViewModel.getAllSavings().observe(this, new Observer<List<Saving>>() {
 //            @Override
 //            public void onChanged(List<Saving> savings) {

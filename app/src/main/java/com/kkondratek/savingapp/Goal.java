@@ -19,10 +19,10 @@ public class Goal {
 
     private String details;
 
-    public Goal(String name, String price, int priority, String details) {
+    public Goal(String name, String price, String details) {
         this.name = name;
         this.price = price;
-        this.priority = priority;
+        this.priority = 0;
         this.details = details;
     }
 
