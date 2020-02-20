@@ -30,9 +30,16 @@ public class GoalsPageFragm extends Fragment {
     public static final int ADD_GOAL_REQUEST = 1;
     private GoalViewModel goalViewModel;
 
+
+    @Nullable
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        final GoalAdapter goalAdapter = new GoalAdapter();
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        final View view = (ViewGroup)inflater
+                .inflate(R.layout.page_goals, container,false);
+
+                final GoalAdapter goalAdapter = new GoalAdapter();
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -49,6 +56,7 @@ public class GoalsPageFragm extends Fragment {
         });
 
         FloatingActionButton buttonAdd = view.findViewById(R.id.button_add_goal);
+
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,17 +64,8 @@ public class GoalsPageFragm extends Fragment {
                 startActivityForResult(intent, ADD_GOAL_REQUEST);
             }
         });
-    }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        final ViewGroup rootView = (ViewGroup)inflater
-                .inflate(R.layout.page_goals, container,false);
-
-        return rootView;
+        return view;
     }
 
     @Override
