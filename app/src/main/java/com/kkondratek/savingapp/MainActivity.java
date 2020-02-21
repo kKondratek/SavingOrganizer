@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton addAmount = findViewById(R.id.addAmount);
         ImageButton substractAmount = findViewById(R.id.subAmount);
 
-        final EditText amountInput = (EditText) findViewById(R.id.edit_text_amount);
+        final EditText amountInput = findViewById(R.id.edit_text_amount);
 
         addAmount.setOnClickListener(new View.OnClickListener() {
             @Override

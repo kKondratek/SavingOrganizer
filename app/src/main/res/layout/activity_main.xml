@@ -82,10 +82,10 @@
                 android:id="@+id/addAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
                 android:clickable="true"
                 android:focusable="true"
-                android:src="@drawable/ic_add_box"
+                android:src="@drawable/ic_add_white_30dp"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1" />
 
@@ -94,10 +94,10 @@
                 android:id="@+id/subAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
                 android:clickable="true"
                 android:focusable="true"
-                android:src="@drawable/ic_indeterminate_box"
+                android:src="@drawable/ic_remove_white_30dp"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1" />
 
@@ -143,7 +143,7 @@
                         android:gravity="start"
                         android:text="Savings"
                         android:textColor="#ffffff"
-                        android:textSize="30sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -152,7 +152,7 @@
                         android:gravity="end"
                         android:text="Goals"
                         android:textColor="#ffffff"
-                        android:textSize="30sp" />
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
