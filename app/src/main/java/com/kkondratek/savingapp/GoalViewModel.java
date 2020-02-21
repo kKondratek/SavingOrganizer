@@ -34,7 +34,7 @@ public class GoalViewModel extends AndroidViewModel {
         repository.deleteAllGoals();
     }
 
-    public LiveData<List<Goal>> getAllSavings() {
+    public LiveData<List<Goal>> getAllGoals() {
         return repository.getAllGoals();
     }
 }

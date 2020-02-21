@@ -36,6 +36,23 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
         return goals.size();
     }
 
+    public int getTotalPrice() {
+
+        int totalPrice = 0;
+
+        if (goals.size() > 0) {
+            for (Goal goal : goals) {
+                totalPrice += Integer.parseInt(goal.getPrice());
+            }
+        }
+
+        return totalPrice;
+    }
+
+    public Goal getGoalAt(int position) {
+        return goals.get(position);
+    }
+
     public void setGoals(List<Goal> goals) {
         this.goals = goals;
         notifyDataSetChanged();

@@ -13,22 +13,20 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.kkondratek.savingapp.fragments.GoalsPageFragm;
 import com.kkondratek.savingapp.fragments.SavingsPageFragm;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager pager;
-    private PagerAdapter pagerAdapter;
-
+    private EventBus bus = EventBus.getDefault();
+    private TextView totalPriceView;
     private BalanceController balanceController;
 
-
-//    private SavingViewModel savingViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +39,16 @@ public class MainActivity extends AppCompatActivity {
         pageList.add(savingsPageFragm);
         pageList.add(goalsPageFragm);
 
-        pager = findViewById(R.id.viewPager);
-        pagerAdapter = new SlidePagerAdapter(getSupportFragmentManager(), pageList);
+        ViewPager pager = findViewById(R.id.viewPager);
+        PagerAdapter pagerAdapter = new SlidePagerAdapter(getSupportFragmentManager(), pageList);
 
         pager.setAdapter(pagerAdapter);
 
         SharedPreferences balance = this.getSharedPreferences("Balance", Context.MODE_PRIVATE);
-        TextView balanceView = (TextView) findViewById(R.id.balance);
+        TextView balanceView = findViewById(R.id.text_view_balance);
+
+        totalPriceView = findViewById(R.id.text_view_total_price);
+        bus.register(this);
 
         balanceController = new BalanceController(balanceView, balance);
 
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 balanceController.substractAmount(amountInput);
             }
         });
+
+    }
+
+    public void onEvent(UpdateTextEvent event) {
+        totalPriceView.setText(event.getTextValue());
     }
 
 }

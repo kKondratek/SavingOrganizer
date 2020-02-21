@@ -41,7 +41,7 @@
                 app:layout_rowWeight="1" />
 
             <TextView
-                android:id="@+id/balance"
+                android:id="@+id/text_view_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
@@ -52,10 +52,9 @@
                 app:layout_rowWeight="2" />
 
             <TextView
-                android:id="@+id/goalsPrice"
+                android:id="@+id/text_view_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="total price"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 app:layout_column="1"

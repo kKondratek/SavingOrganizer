@@ -16,14 +16,14 @@ public class BalanceController {
         balanceView.setText(balanceStr);
     }
 
-    public void addAmount(EditText value) {
+    public void addAmount(EditText editText) {
         int newBalance;
-        if (value.getText().toString().isEmpty()) {
+        if (editText.getText().toString().isEmpty()) {
             return;
         } else {
             newBalance = balance
                     .getInt("balance", 0)
-                    + Integer.parseInt(value.getText().toString());
+                    + Integer.parseInt(editText.getText().toString());
         }
             SharedPreferences.Editor editor = balance.edit();
             editor.putInt("balance", newBalance);
@@ -33,14 +33,14 @@ public class BalanceController {
 
     }
 
-    public void substractAmount(EditText value) {
+    public void substractAmount(EditText editText) {
         int newBalance;
-        if (value.getText().toString().isEmpty()) {
+        if (editText.getText().toString().isEmpty()) {
             return;
         } else {
             newBalance = balance
                     .getInt("balance", 0)
-                    - Integer.parseInt(value.getText().toString());
+                    - Integer.parseInt(editText.getText().toString());
             if (newBalance < 0) {
                 newBalance = 0;
             }

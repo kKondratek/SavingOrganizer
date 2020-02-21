@@ -1,10 +1,12 @@
 package com.kkondratek.savingapp.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,24 +25,28 @@ import com.kkondratek.savingapp.GoalAdapter;
 import com.kkondratek.savingapp.GoalViewModel;
 import com.kkondratek.savingapp.MainActivity;
 import com.kkondratek.savingapp.R;
+import com.kkondratek.savingapp.UpdateTextEvent;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 public class GoalsPageFragm extends Fragment {
 
     public static final int ADD_GOAL_REQUEST = 1;
     private GoalViewModel goalViewModel;
 
+    private EventBus bus = EventBus.getDefault();
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull final LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        final View view = (ViewGroup)inflater
+        final View view = inflater
                 .inflate(R.layout.page_goals, container,false);
 
-                final GoalAdapter goalAdapter = new GoalAdapter();
+        final GoalAdapter goalAdapter = new GoalAdapter();
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -48,10 +55,11 @@ public class GoalsPageFragm extends Fragment {
         recyclerView.setAdapter(goalAdapter);
 
         goalViewModel = ViewModelProviders.of(this).get(GoalViewModel.class);
-        goalViewModel.getAllSavings().observe(this, new Observer<List<Goal>>() {
+        goalViewModel.getAllGoals().observe(this, new Observer<List<Goal>>() {
             @Override
             public void onChanged(List<Goal> goals) {
                 goalAdapter.setGoals(goals);
+                bus.post(new UpdateTextEvent(String.valueOf(goalAdapter.getTotalPrice())));
             }
         });
 
@@ -64,6 +72,24 @@ public class GoalsPageFragm extends Fragment {
                 startActivityForResult(intent, ADD_GOAL_REQUEST);
             }
         });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                goalViewModel.delete(goalAdapter.getGoalAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(getContext(), "Goal deleted", Toast.LENGTH_LONG).show();
+
+            }
+        }).attachToRecyclerView(recyclerView);
 
         return view;
     }

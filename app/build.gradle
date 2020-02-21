@@ -37,7 +37,8 @@ android {
 
         testImplementation "androidx.room:room-testing:$room_version"
 
-        compile 'org.fabiomsr:moneytextview:1.0.3'
+        implementation 'de.greenrobot:eventbus:2.4.0'
+
     }
 }
 
