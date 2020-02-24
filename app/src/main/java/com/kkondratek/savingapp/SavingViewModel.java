@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.kkondratek.savingapp.data.Saving;
+import com.kkondratek.savingapp.data.SavingRepository;
+
 import java.util.List;
 
 public class SavingViewModel extends AndroidViewModel {

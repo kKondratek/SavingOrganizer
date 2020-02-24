@@ -1,4 +1,4 @@
-package com.kkondratek.savingapp;
+package com.kkondratek.savingapp.data;
 
 import android.content.Context;
 import android.os.AsyncTask;

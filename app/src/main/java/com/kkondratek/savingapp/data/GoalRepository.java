@@ -1,11 +1,15 @@
-package com.kkondratek.savingapp;
+package com.kkondratek.savingapp.data;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Delete;
-import androidx.room.Update;
+
+import com.kkondratek.savingapp.data.AppDatabase;
+import com.kkondratek.savingapp.data.Goal;
+import com.kkondratek.savingapp.data.GoalDao;
+import com.kkondratek.savingapp.data.Saving;
+import com.kkondratek.savingapp.data.SavingDao;
 
 import java.util.List;
 

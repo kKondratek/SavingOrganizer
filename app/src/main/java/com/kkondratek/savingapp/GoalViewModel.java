@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.kkondratek.savingapp.data.Goal;
+import com.kkondratek.savingapp.data.GoalRepository;
+
 import java.util.List;
 
 public class GoalViewModel extends AndroidViewModel {

@@ -1,4 +1,4 @@
-package com.kkondratek.savingapp;
+package com.kkondratek.savingapp.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
