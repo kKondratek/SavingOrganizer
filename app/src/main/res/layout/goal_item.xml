@@ -57,23 +57,16 @@
                 android:visibility="gone"/>
 
             <ImageButton
-                android:id="@+id/image_button_up"
+                android:id="@+id/image_button_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_up_30dp"
+                android:src="@drawable/ic_edit_30dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/text_view_details"
                 android:visibility="gone"/>
 
-            <ImageButton
-                android:id="@+id/image_button_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_down_30dp"
-                android:layout_toLeftOf="@id/image_button_up"
-                android:layout_below="@id/text_view_details"
-                android:visibility="gone" />
+
 
         </RelativeLayout>
 

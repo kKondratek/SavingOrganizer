@@ -16,6 +16,7 @@ import java.util.List;
 public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
 
     private List<Goal> goals = new ArrayList<>();
+    private int focusedItemPosition;
 
     @NonNull
     @Override
@@ -67,11 +68,30 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
         private TextView textViewDetails;
         private TextView textViewPrice;
 
-        public GoalHolder(@NonNull View itemView) {
+        public GoalHolder(@NonNull final View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.text_view_name);
             textViewDetails = itemView.findViewById(R.id.text_view_details);
             textViewPrice = itemView.findViewById(R.id.text_view_price);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != focusedItemPosition) {
+                        focusedItemPosition = position;
+                        itemView.findViewById(R.id.image_button_done).setVisibility(View.VISIBLE);
+                        itemView.findViewById(R.id.image_button_edit).setVisibility(View.VISIBLE);
+                        itemView.findViewById(R.id.text_view_details).setVisibility(View.VISIBLE);
+                    } else {
+                        focusedItemPosition = -1;
+                        itemView.findViewById(R.id.image_button_done).setVisibility(View.GONE);
+                        itemView.findViewById(R.id.image_button_edit).setVisibility(View.GONE);
+                        itemView.findViewById(R.id.text_view_details).setVisibility(View.GONE);
+                    }
+                }
+            });
         }
     }
+
 }
