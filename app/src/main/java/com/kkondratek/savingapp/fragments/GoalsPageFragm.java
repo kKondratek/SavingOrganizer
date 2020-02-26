@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.kkondratek.savingapp.AddGoalActivity;
+import com.kkondratek.savingapp.AddEditGoalActivity;
 import com.kkondratek.savingapp.GoalAdapter;
 import com.kkondratek.savingapp.GoalViewModel;
 import com.kkondratek.savingapp.MainActivity;
@@ -33,6 +33,7 @@ import de.greenrobot.event.EventBus;
 public class GoalsPageFragm extends Fragment {
 
     public static final int ADD_GOAL_REQUEST = 1;
+    public static final int EDIT_GOAL_REQUEST = 2;
     private GoalViewModel goalViewModel;
 
     private EventBus bus = EventBus.getDefault();
@@ -67,7 +68,7 @@ public class GoalsPageFragm extends Fragment {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AddGoalActivity.class);
+                Intent intent = new Intent(getContext(), AddEditGoalActivity.class);
                 startActivityForResult(intent, ADD_GOAL_REQUEST);
             }
         });
@@ -100,6 +101,18 @@ public class GoalsPageFragm extends Fragment {
             }
         }).attachToRecyclerView(recyclerView);
 
+        goalAdapter.setOnButtonClickedListener(new GoalAdapter.OnEditButtonClickListener() {
+            @Override
+            public void onEditButtonClicked(Goal goal) {
+                Intent intent = new Intent(getContext(), AddEditGoalActivity.class);
+                intent.putExtra(AddEditGoalActivity.EXTRA_ID, goal.getId());
+                intent.putExtra(AddEditGoalActivity.EXTRA_NAME, goal.getName());
+                intent.putExtra(AddEditGoalActivity.EXTRA_DETAILS, goal.getDetails());
+                intent.putExtra(AddEditGoalActivity.EXTRA_PRICE, goal.getPrice());
+                startActivityForResult(intent, EDIT_GOAL_REQUEST);
+            }
+        });
+
         return view;
     }
 
@@ -108,17 +121,35 @@ public class GoalsPageFragm extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_GOAL_REQUEST && resultCode == MainActivity.RESULT_OK) {
-            String name = data.getStringExtra(AddGoalActivity.EXTRA_NAME);
-            String details = data.getStringExtra(AddGoalActivity.EXTRA_DETAILS);
-            String price = data.getStringExtra(AddGoalActivity.EXTRA_PRICE);
+            String name = data.getStringExtra(AddEditGoalActivity.EXTRA_NAME);
+            String details = data.getStringExtra(AddEditGoalActivity.EXTRA_DETAILS);
+            String price = data.getStringExtra(AddEditGoalActivity.EXTRA_PRICE);
 
             Goal goal = new Goal(name, price, details);
             goalViewModel.insert(goal);
 
             Toast.makeText(getContext(), "Goal added", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "Goal not added", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == EDIT_GOAL_REQUEST && resultCode == MainActivity.RESULT_OK){
 
+            int id = data.getIntExtra(AddEditGoalActivity.EXTRA_ID, -1);
+
+            if (id == -1) {
+                Toast.makeText(getContext(), "Goal can't be created", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String name = data.getStringExtra(AddEditGoalActivity.EXTRA_NAME);
+            String details = data.getStringExtra(AddEditGoalActivity.EXTRA_DETAILS);
+            String price = data.getStringExtra(AddEditGoalActivity.EXTRA_PRICE);
+
+            Goal goal = new Goal(name, price, details);
+            goal.setId(id);
+
+            goalViewModel.update(goal);
+
+            Toast.makeText(getContext(), "Goal updated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Goal not saved", Toast.LENGTH_SHORT).show();
         }
     }
 }

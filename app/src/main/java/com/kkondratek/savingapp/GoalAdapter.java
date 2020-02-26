@@ -3,6 +3,7 @@ package com.kkondratek.savingapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,12 +18,14 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
 
     private List<Goal> goals = new ArrayList<>();
     private int focusedItemPosition;
+    private OnEditButtonClickListener listener;
 
     @NonNull
     @Override
     public GoalHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.goal_item, parent, false);
+
         return new GoalHolder(itemView);
     }
 
@@ -53,7 +56,6 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
     }
 
 
-
     public Goal getGoalAt(int position) {
         return goals.get(position);
     }
@@ -67,12 +69,26 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
         private TextView textViewName;
         private TextView textViewDetails;
         private TextView textViewPrice;
+        private ImageButton buttonEdit;
+        private ImageButton buttonDone;
 
         public GoalHolder(@NonNull final View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.text_view_name);
             textViewDetails = itemView.findViewById(R.id.text_view_details);
             textViewPrice = itemView.findViewById(R.id.text_view_price);
+            buttonEdit = itemView.findViewById(R.id.image_button_edit);
+            buttonDone = itemView.findViewById(R.id.image_button_done);
+
+            buttonEdit.setOnClickListener(new ImageButton.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onEditButtonClicked(goals.get(position));
+                    }
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -80,18 +96,27 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
                     int position = getAdapterPosition();
                     if (position != focusedItemPosition) {
                         focusedItemPosition = position;
-                        itemView.findViewById(R.id.image_button_done).setVisibility(View.VISIBLE);
-                        itemView.findViewById(R.id.image_button_edit).setVisibility(View.VISIBLE);
-                        itemView.findViewById(R.id.text_view_details).setVisibility(View.VISIBLE);
+                        buttonDone.setVisibility(View.VISIBLE);
+                        buttonEdit.setVisibility(View.VISIBLE);
+                        textViewDetails.setVisibility(View.VISIBLE);
                     } else {
                         focusedItemPosition = -1;
-                        itemView.findViewById(R.id.image_button_done).setVisibility(View.GONE);
-                        itemView.findViewById(R.id.image_button_edit).setVisibility(View.GONE);
-                        itemView.findViewById(R.id.text_view_details).setVisibility(View.GONE);
+                        buttonDone.setVisibility(View.GONE);
+                        buttonEdit.setVisibility(View.GONE);
+                        textViewDetails.setVisibility(View.GONE);
                     }
                 }
             });
         }
     }
+
+    public interface OnEditButtonClickListener {
+        void onEditButtonClicked(Goal goal);
+    }
+
+    public void setOnButtonClickedListener(OnEditButtonClickListener listener) {
+        this.listener = listener;
+    }
+
 
 }

@@ -13,7 +13,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".AddSavingActivity"></activity>
         <activity
-            android:name=".AddGoalActivity"
+            android:name=".AddEditGoalActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"

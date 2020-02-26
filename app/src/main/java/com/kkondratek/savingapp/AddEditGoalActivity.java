@@ -11,8 +11,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddGoalActivity extends AppCompatActivity {
+public class AddEditGoalActivity extends AppCompatActivity {
 
+    public static final String EXTRA_ID =
+            "com.kkondratek.savingapp.EXTRA_ID";
     public static final String EXTRA_NAME =
             "com.kkondratek.savingapp.EXTRA_NAME";
     public static final String EXTRA_DETAILS =
@@ -34,7 +36,18 @@ public class AddGoalActivity extends AppCompatActivity {
         editTextPrice = findViewById(R.id.edit_text_price);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Goal");
+
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(EXTRA_ID)) {
+            setTitle("Edit Goal");
+            editTextName.setText(intent.getStringExtra(EXTRA_NAME));
+            editTextPrice.setText(intent.getStringExtra(EXTRA_PRICE));
+            editTextDetails.setText(intent.getStringExtra(EXTRA_DETAILS));
+        } else {
+            setTitle("Add Goal");
+        }
+
     }
 
     private void saveGoal() {
@@ -51,6 +64,11 @@ public class AddGoalActivity extends AppCompatActivity {
         data.putExtra(EXTRA_NAME, name);
         data.putExtra(EXTRA_DETAILS, details);
         data.putExtra(EXTRA_PRICE, price);
+
+        int id = getIntent().getIntExtra(EXTRA_ID, -1);
+        if (id != -1) {
+            data.putExtra(EXTRA_ID, id);
+        }
 
         setResult(RESULT_OK, data);
         finish();
