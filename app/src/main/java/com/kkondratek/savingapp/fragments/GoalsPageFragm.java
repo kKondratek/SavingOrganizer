@@ -18,13 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kkondratek.savingapp.AddGoalActivity;
-import com.kkondratek.savingapp.data.Goal;
 import com.kkondratek.savingapp.GoalAdapter;
 import com.kkondratek.savingapp.GoalViewModel;
 import com.kkondratek.savingapp.MainActivity;
 import com.kkondratek.savingapp.R;
 import com.kkondratek.savingapp.UpdateTextEvent;
+import com.kkondratek.savingapp.data.Goal;
 
+import java.util.Collections;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -71,12 +72,22 @@ public class GoalsPageFragm extends Fragment {
             }
         });
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP | ItemTouchHelper.DOWN,
                 ItemTouchHelper.LEFT) {
+
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,
-                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder dragged,
                                   @NonNull RecyclerView.ViewHolder target) {
+
+                int positionDragged = dragged.getAdapterPosition();
+                int positionTarget = target.getAdapterPosition();
+
+                Collections.swap(goalViewModel.getAllGoals().getValue(), positionDragged, positionTarget);
+
+                goalAdapter.notifyItemMoved(positionDragged, positionTarget);
+
                 return false;
             }
 

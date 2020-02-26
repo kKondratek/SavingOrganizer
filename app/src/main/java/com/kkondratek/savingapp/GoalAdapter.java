@@ -51,6 +51,8 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
         return totalPrice;
     }
 
+
+
     public Goal getGoalAt(int position) {
         return goals.get(position);
     }
