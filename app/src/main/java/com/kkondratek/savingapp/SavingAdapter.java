@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kkondratek.savingapp.data.Goal;
 import com.kkondratek.savingapp.data.Saving;
 
 import java.util.ArrayList;
@@ -55,6 +54,15 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.SavingHold
     @Override
     public int getItemCount() {
         return savings.size();
+    }
+
+    public void setSavings(List<Saving> savings) {
+        this.savings = savings;
+        notifyDataSetChanged();
+    }
+
+    public Saving getSavingAt(int position) {
+        return savings.get(position);
     }
 
     class SavingHolder extends RecyclerView.ViewHolder {

@@ -4,11 +4,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
-
 @Entity(tableName = "savings")
 public class Saving {
+
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -19,8 +17,7 @@ public class Saving {
     @ColumnInfo(name = "day_of_month")
     private int monthDay;
 
-    public Saving(int id, String name, String amount, int monthDay) {
-        this.id = id;
+    public Saving(String name, String amount, int monthDay) {
         this.name = name;
         this.monthDay = monthDay;
         this.amount = amount;
@@ -49,6 +46,12 @@ public class Saving {
     public void setMonthDay(int monthDay) {
         this.monthDay = monthDay;
     }
+    public void setMonthDay(String monthDay) {
+        this.monthDay = Integer.parseInt(monthDay);
+    }
     public int getId() {return id;}
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }

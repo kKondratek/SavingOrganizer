@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/save_goal"
+        android:id="@+id/save_item"
         android:icon="@drawable/ic_add_black"
         android:title="Save"
         app:showAsAction="ifRoom"/>
