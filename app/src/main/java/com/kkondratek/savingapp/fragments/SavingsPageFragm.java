@@ -54,7 +54,7 @@ public class SavingsPageFragm extends Fragment {
         savingViewModel.getAllSavings().observe(this, new Observer<List<Saving>>() {
             @Override
             public void onChanged(List<Saving> savings) {
-                savingAdapter.setSavings(savings);
+                savingAdapter.submitList(savings);
             }
         });
 

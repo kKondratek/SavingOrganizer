@@ -6,16 +6,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kkondratek.savingapp.data.Saving;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SavingAdapter extends ListAdapter<Saving, SavingAdapter.SavingHolder> {
 
-public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.SavingHolder> {
+    public SavingAdapter() {
+        super(DIFF_CALLBACK);
+    }
 
-    private List<Saving> savings = new ArrayList<>();
+    private static DiffUtil.ItemCallback<Saving> DIFF_CALLBACK = new DiffUtil.ItemCallback<Saving>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Saving oldItem, @NonNull Saving newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Saving oldItem, @NonNull Saving newItem) {
+            return oldItem.getName().equals(newItem.getName()) &&
+                    oldItem.getAmount().equals(newItem.getAmount()) &&
+                    oldItem.getMonthDay() == newItem.getMonthDay();
+        }
+    };
 
     @NonNull
     @Override
@@ -27,7 +42,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.SavingHold
 
     @Override
     public void onBindViewHolder(@NonNull SavingAdapter.SavingHolder holder, int position) {
-        Saving currentSaving = savings.get(position);
+        Saving currentSaving = getItem(position);
         String ord;
         int monthDay = currentSaving.getMonthDay();
 
@@ -51,18 +66,8 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.SavingHold
         holder.textViewAmount.setText(amount);
     }
 
-    @Override
-    public int getItemCount() {
-        return savings.size();
-    }
-
-    public void setSavings(List<Saving> savings) {
-        this.savings = savings;
-        notifyDataSetChanged();
-    }
-
     public Saving getSavingAt(int position) {
-        return savings.get(position);
+        return getItem(position);
     }
 
     class SavingHolder extends RecyclerView.ViewHolder {
