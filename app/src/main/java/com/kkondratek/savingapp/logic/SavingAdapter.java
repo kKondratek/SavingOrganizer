@@ -6,32 +6,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kkondratek.savingapp.R;
 import com.kkondratek.savingapp.data.Saving;
 
-public class SavingAdapter extends ListAdapter<Saving, SavingAdapter.SavingHolder> {
+import java.util.ArrayList;
+import java.util.List;
 
-    public SavingAdapter() {
-        super(DIFF_CALLBACK);
-    }
+public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.SavingHolder> {
 
-    private static DiffUtil.ItemCallback<Saving> DIFF_CALLBACK = new DiffUtil.ItemCallback<Saving>() {
-        @Override
-        public boolean areItemsTheSame(@NonNull Saving oldItem, @NonNull Saving newItem) {
-            return oldItem.getId() == newItem.getId();
-        }
-
-        @Override
-        public boolean areContentsTheSame(@NonNull Saving oldItem, @NonNull Saving newItem) {
-            return oldItem.getName().equals(newItem.getName()) &&
-                    oldItem.getAmount().equals(newItem.getAmount()) &&
-                    oldItem.getMonthDay() == newItem.getMonthDay();
-        }
-    };
+    private List<Saving> savings = new ArrayList<>();
 
     @NonNull
     @Override
@@ -43,7 +28,7 @@ public class SavingAdapter extends ListAdapter<Saving, SavingAdapter.SavingHolde
 
     @Override
     public void onBindViewHolder(@NonNull SavingAdapter.SavingHolder holder, int position) {
-        Saving currentSaving = getItem(position);
+        Saving currentSaving = savings.get(position);
         String ord;
         int monthDay = currentSaving.getMonthDay();
 
@@ -67,8 +52,18 @@ public class SavingAdapter extends ListAdapter<Saving, SavingAdapter.SavingHolde
         holder.textViewAmount.setText(amount);
     }
 
+    @Override
+    public int getItemCount() {
+        return savings.size();
+    }
+
+    public void setSavings(List<Saving> savings) {
+        this.savings = savings;
+        notifyDataSetChanged();
+    }
+
     public Saving getSavingAt(int position) {
-        return getItem(position);
+        return savings.get(position);
     }
 
     class SavingHolder extends RecyclerView.ViewHolder {

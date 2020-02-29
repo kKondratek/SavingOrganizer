@@ -33,7 +33,6 @@ public class SavingsPageFragm extends Fragment {
     private SavingViewModel savingViewModel;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,11 +41,12 @@ public class SavingsPageFragm extends Fragment {
         final View view = inflater
                 .inflate(R.layout.page_savings, container,false);
 
-        final SavingAdapter savingAdapter = new SavingAdapter();
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_savings);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setHasFixedSize(true);
+
+        final SavingAdapter savingAdapter = new SavingAdapter();
 
         recyclerView.setAdapter(savingAdapter);
 
@@ -54,7 +54,8 @@ public class SavingsPageFragm extends Fragment {
         savingViewModel.getAllSavings().observe(this, new Observer<List<Saving>>() {
             @Override
             public void onChanged(List<Saving> savings) {
-                savingAdapter.submitList(savings);
+                savingAdapter.setSavings(savings);
+
             }
         });
 
@@ -79,8 +80,8 @@ public class SavingsPageFragm extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-                savingViewModel.delete(savingAdapter.getSavingAt(viewHolder.getAdapterPosition()));
+                int position = viewHolder.getAdapterPosition();
+                savingViewModel.delete(savingAdapter.getSavingAt(position));
                 Toast.makeText(getContext(), "Saving deleted", Toast.LENGTH_LONG).show();
 
             }
