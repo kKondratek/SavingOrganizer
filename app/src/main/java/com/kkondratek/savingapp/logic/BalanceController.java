@@ -1,4 +1,4 @@
-package com.kkondratek.savingapp;
+package com.kkondratek.savingapp.logic;
 
 import android.content.SharedPreferences;
 import android.widget.EditText;
@@ -9,7 +9,7 @@ public class BalanceController {
     private SharedPreferences balance;
     private TextView balanceView;
 
-    BalanceController(TextView balanceView, SharedPreferences balance) {
+    public BalanceController(TextView balanceView, SharedPreferences balance) {
         this.balanceView = balanceView;
         this.balance = balance;
         String balanceStr = balance.getInt("balance", 0) + "PLN";

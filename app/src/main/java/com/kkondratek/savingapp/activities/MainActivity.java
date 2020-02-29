@@ -1,4 +1,4 @@
-package com.kkondratek.savingapp;
+package com.kkondratek.savingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.kkondratek.savingapp.logic.BalanceController;
+import com.kkondratek.savingapp.R;
+import com.kkondratek.savingapp.logic.SlidePagerAdapter;
+import com.kkondratek.savingapp.logic.UpdateTextEvent;
 import com.kkondratek.savingapp.fragments.GoalsPageFragm;
 import com.kkondratek.savingapp.fragments.SavingsPageFragm;
 

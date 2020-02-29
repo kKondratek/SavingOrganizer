@@ -1,4 +1,4 @@
-package com.kkondratek.savingapp;
+package com.kkondratek.savingapp.logic;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

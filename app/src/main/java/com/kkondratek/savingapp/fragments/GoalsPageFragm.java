@@ -17,12 +17,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.kkondratek.savingapp.AddEditGoalActivity;
-import com.kkondratek.savingapp.GoalAdapter;
-import com.kkondratek.savingapp.GoalViewModel;
-import com.kkondratek.savingapp.MainActivity;
+import com.kkondratek.savingapp.activities.AddEditGoalActivity;
+import com.kkondratek.savingapp.logic.GoalAdapter;
+import com.kkondratek.savingapp.logic.GoalViewModel;
+import com.kkondratek.savingapp.activities.MainActivity;
 import com.kkondratek.savingapp.R;
-import com.kkondratek.savingapp.UpdateTextEvent;
+import com.kkondratek.savingapp.logic.UpdateTextEvent;
 import com.kkondratek.savingapp.data.Goal;
 
 import java.util.Collections;

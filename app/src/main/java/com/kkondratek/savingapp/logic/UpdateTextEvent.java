@@ -1,4 +1,4 @@
-package com.kkondratek.savingapp;
+package com.kkondratek.savingapp.logic;
 
 public class UpdateTextEvent {
     private String sampleTextValue;

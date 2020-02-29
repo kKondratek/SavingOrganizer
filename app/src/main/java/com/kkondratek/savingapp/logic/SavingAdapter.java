@@ -1,4 +1,4 @@
-package com.kkondratek.savingapp;
+package com.kkondratek.savingapp.logic;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kkondratek.savingapp.R;
 import com.kkondratek.savingapp.data.Saving;
 
 public class SavingAdapter extends ListAdapter<Saving, SavingAdapter.SavingHolder> {
