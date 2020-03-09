@@ -27,7 +27,7 @@ public class BalanceController {
         }
             SharedPreferences.Editor editor = balance.edit();
             editor.putInt("balance", newBalance);
-            editor.commit();
+            editor.apply();
             String balanceStr = balance.getInt("balance", 0) + "PLN";
             balanceView.setText(balanceStr);
 
@@ -47,7 +47,7 @@ public class BalanceController {
         }
         SharedPreferences.Editor editor = balance.edit();
         editor.putInt("balance", newBalance);
-        editor.commit();
+        editor.apply();
         String balanceStr = balance.getInt("balance", 0) + "PLN";
         balanceView.setText(balanceStr);
 
