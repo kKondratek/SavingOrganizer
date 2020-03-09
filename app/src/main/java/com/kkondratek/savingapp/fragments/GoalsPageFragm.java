@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.kkondratek.savingapp.activities.MainActivity;
 import com.kkondratek.savingapp.data.Goal;
 import com.kkondratek.savingapp.logic.GoalAdapter;
 import com.kkondratek.savingapp.logic.GoalViewModel;
+import com.kkondratek.savingapp.logic.MainTextViews;
 import com.kkondratek.savingapp.logic.UpdateTextEvent;
 
 import java.util.Collections;
@@ -118,22 +120,25 @@ public class GoalsPageFragm extends Fragment {
             public void onDoneButtonClicked(Goal goal) {
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 int balance = MainActivity.getIntPref("balance", getContext());
-                    int price = Integer.parseInt(goalAdapter.getGoalAt(goalAdapter
+                System.out.println("balance: " + balance);
+                int price = Integer.parseInt(goalAdapter.getGoalAt(goalAdapter
                             .getFocusedItemPosition()).getPrice());
                     if (balance >= price) {
                         balance -= price;
                         MainActivity.putIntPref("balance", balance, getContext());
                         System.out.println(balance + "it works");
-//                        TextView balanceView = getView().getRootView().findViewById(R.id.text_view_balance);
-//
-//                        String balanceString = String.valueOf(balance);
-//                        balanceView.setText(balanceString);
+
+                        TextView balanceView = MainTextViews.instance().getBalanceView();
+                        String balanceString = String.valueOf(balance);
+                        balanceView.setText(balanceString);
+
+                        goalViewModel.delete(goalAdapter.getGoalAt(goalAdapter.getFocusedItemPosition()));
+                        Toast.makeText(getContext(), "Goal achieved", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "You can't afford it", Toast.LENGTH_SHORT).show();
                     }
-                goalViewModel.delete(goalAdapter.getGoalAt(goalAdapter.getFocusedItemPosition()));
-                Toast.makeText(getContext(), "Goal achieved", Toast.LENGTH_LONG).show();
             }
         });
-
         return view;
     }
 

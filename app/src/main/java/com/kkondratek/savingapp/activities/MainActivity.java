@@ -19,6 +19,7 @@ import com.kkondratek.savingapp.R;
 import com.kkondratek.savingapp.fragments.GoalsPageFragm;
 import com.kkondratek.savingapp.fragments.SavingsPageFragm;
 import com.kkondratek.savingapp.logic.BalanceController;
+import com.kkondratek.savingapp.logic.MainTextViews;
 import com.kkondratek.savingapp.logic.SlidePagerAdapter;
 import com.kkondratek.savingapp.logic.UpdateTextEvent;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EventBus bus = EventBus.getDefault();
     private TextView totalPriceView;
+    private TextView balanceView;
     private BalanceController balanceController;
     public static final String preferencesName = "app_prefs";
 
@@ -39,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         List<Fragment> pageList = new ArrayList<>();
@@ -56,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = this.getSharedPreferences(preferencesName,
                 Context.MODE_PRIVATE);
 
-        TextView balanceView = findViewById(R.id.text_view_balance);
-
+        balanceView = findViewById(R.id.text_view_balance);
         totalPriceView = findViewById(R.id.text_view_total_price);
         bus.register(this);
 
@@ -67,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
         ImageButton substractAmount = findViewById(R.id.subAmount);
 
         final EditText amountInput = findViewById(R.id.edit_text_amount);
+
+        MainTextViews mainTextViews = MainTextViews.instance();
+        mainTextViews.setBalanceView(balanceView);
+        mainTextViews.setPriceView(totalPriceView);
 
         addAmount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void putIntPref(String key, int value, Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = context.getSharedPreferences(preferencesName, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(key, value);
         editor.apply();
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static int getIntPref(String key, Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences preferences = context.getSharedPreferences(preferencesName, MODE_PRIVATE);
         return preferences.getInt(key, 0);
     }
 
