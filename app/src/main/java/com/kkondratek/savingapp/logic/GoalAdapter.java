@@ -19,7 +19,8 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
 
     private List<Goal> goals = new ArrayList<>();
     private int focusedItemPosition;
-    private OnEditButtonClickListener listener;
+    private OnEditButtonClickListener editListener;
+    private OnDoneButtonClickListener doneListener;
 
     @NonNull
     @Override
@@ -52,7 +53,6 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
                 totalPrice += Integer.parseInt(goal.getPrice());
             }
         }
-
         return totalPrice;
     }
 
@@ -75,6 +75,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
 
         public GoalHolder(@NonNull final View itemView) {
             super(itemView);
+
             textViewName = itemView.findViewById(R.id.text_view_name);
             textViewDetails = itemView.findViewById(R.id.text_view_details);
             textViewPrice = itemView.findViewById(R.id.text_view_price);
@@ -85,8 +86,18 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    if (listener != null && position != RecyclerView.NO_POSITION) {
-                        listener.onEditButtonClicked(goals.get(position));
+                    if (editListener != null && position != RecyclerView.NO_POSITION) {
+                        editListener.onEditButtonClicked(goals.get(position));
+                    }
+                }
+            });
+
+            buttonDone.setOnClickListener(new ImageButton.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (doneListener != null && position != RecyclerView.NO_POSITION) {
+                        doneListener.onDoneButtonClicked(goals.get(position));
                     }
                 }
             });
@@ -111,13 +122,28 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalHolder> {
         }
     }
 
+    public int getFocusedItemPosition() {
+        return focusedItemPosition;
+    }
+
+    public Goal getFocusedItem() {
+        return goals.get(getFocusedItemPosition());
+    }
+
     public interface OnEditButtonClickListener {
         void onEditButtonClicked(Goal goal);
     }
 
-    public void setOnButtonClickedListener(OnEditButtonClickListener listener) {
-        this.listener = listener;
+    public interface OnDoneButtonClickListener {
+        void onDoneButtonClicked(Goal goal);
     }
 
+    public void setOnButtonClickedListener(OnEditButtonClickListener listener) {
+        this.editListener = listener;
+    }
+
+    public void setOnButtonClickedListener(OnDoneButtonClickListener listener) {
+        this.doneListener = listener;
+    }
 
 }

@@ -3,6 +3,7 @@ package com.kkondratek.savingapp.activities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -31,12 +32,15 @@ public class MainActivity extends AppCompatActivity {
     private EventBus bus = EventBus.getDefault();
     private TextView totalPriceView;
     private BalanceController balanceController;
+    public static final String preferencesName = "app_prefs";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         List<Fragment> pageList = new ArrayList<>();
         GoalsPageFragm goalsPageFragm = new GoalsPageFragm();
@@ -49,13 +53,15 @@ public class MainActivity extends AppCompatActivity {
 
         pager.setAdapter(pagerAdapter);
 
-        SharedPreferences balance = this.getSharedPreferences("Balance", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences(preferencesName,
+                Context.MODE_PRIVATE);
+
         TextView balanceView = findViewById(R.id.text_view_balance);
 
         totalPriceView = findViewById(R.id.text_view_total_price);
         bus.register(this);
 
-        balanceController = new BalanceController(balanceView, balance);
+        balanceController = new BalanceController(balanceView, sharedPreferences);
 
         ImageButton addAmount = findViewById(R.id.addAmount);
         ImageButton substractAmount = findViewById(R.id.subAmount);
@@ -93,6 +99,30 @@ public class MainActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
+    }
+
+    public static void putStringPref(String key, String value, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    public static void putIntPref(String key, int value, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(key, value);
+        editor.apply();
+    }
+
+    public static String getStringPref(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
+    }
+
+    public static int getIntPref(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getInt(key, 0);
     }
 
 }

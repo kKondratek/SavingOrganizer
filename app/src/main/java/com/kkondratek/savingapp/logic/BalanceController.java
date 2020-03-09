@@ -30,7 +30,6 @@ public class BalanceController {
             editor.apply();
             String balanceStr = balance.getInt("balance", 0) + "PLN";
             balanceView.setText(balanceStr);
-
     }
 
     public void substractAmount(EditText editText) {

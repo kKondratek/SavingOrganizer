@@ -17,13 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kkondratek.savingapp.R;
 import com.kkondratek.savingapp.activities.AddEditGoalActivity;
+import com.kkondratek.savingapp.activities.MainActivity;
+import com.kkondratek.savingapp.data.Goal;
 import com.kkondratek.savingapp.logic.GoalAdapter;
 import com.kkondratek.savingapp.logic.GoalViewModel;
-import com.kkondratek.savingapp.activities.MainActivity;
-import com.kkondratek.savingapp.R;
 import com.kkondratek.savingapp.logic.UpdateTextEvent;
-import com.kkondratek.savingapp.data.Goal;
 
 import java.util.Collections;
 import java.util.List;
@@ -48,7 +48,7 @@ public class GoalsPageFragm extends Fragment {
 
         final GoalAdapter goalAdapter = new GoalAdapter();
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_savings);
+        final RecyclerView recyclerView = view.findViewById(R.id.recycler_view_savings);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setHasFixedSize(true);
 
@@ -110,6 +110,27 @@ public class GoalsPageFragm extends Fragment {
                 intent.putExtra(AddEditGoalActivity.EXTRA_DETAILS, goal.getDetails());
                 intent.putExtra(AddEditGoalActivity.EXTRA_PRICE, goal.getPrice());
                 startActivityForResult(intent, EDIT_GOAL_REQUEST);
+            }
+        });
+
+        goalAdapter.setOnButtonClickedListener(new GoalAdapter.OnDoneButtonClickListener() {
+            @Override
+            public void onDoneButtonClicked(Goal goal) {
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                int balance = MainActivity.getIntPref("balance", getContext());
+                    int price = Integer.parseInt(goalAdapter.getGoalAt(goalAdapter
+                            .getFocusedItemPosition()).getPrice());
+                    if (balance >= price) {
+                        balance -= price;
+                        MainActivity.putIntPref("balance", balance, getContext());
+                        System.out.println(balance + "it works");
+//                        TextView balanceView = getView().getRootView().findViewById(R.id.text_view_balance);
+//
+//                        String balanceString = String.valueOf(balance);
+//                        balanceView.setText(balanceString);
+                    }
+                goalViewModel.delete(goalAdapter.getGoalAt(goalAdapter.getFocusedItemPosition()));
+                Toast.makeText(getContext(), "Goal achieved", Toast.LENGTH_LONG).show();
             }
         });
 
