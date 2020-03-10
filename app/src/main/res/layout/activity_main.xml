@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -108,13 +109,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <!--            android:layout_gravity="clip_horizontal"-->
-            <!--            android:layout_marginBottom="?attr/actionBarSize"-->
-            <!--            app:layout_anchor="@+id/viewPager"-->
-            <!--            app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-
-
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/bottomBar"
                 style="@style/Widget.MaterialComponents.BottomAppBar"
@@ -158,13 +152,6 @@
 
             </com.google.android.material.bottomappbar.BottomAppBar>
 
-<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--                android:id="@+id/button_add_goal"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/ic_plus"-->
-<!--                android:layout_gravity="bottom|end"-->
-<!--                android:layout_margin="10dp"/>-->
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

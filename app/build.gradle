@@ -38,7 +38,6 @@ android {
         testImplementation "androidx.room:room-testing:$room_version"
 
         implementation 'de.greenrobot:eventbus:2.4.0'
-
     }
 }
 
@@ -53,4 +52,5 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
 }
