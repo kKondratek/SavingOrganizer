@@ -12,7 +12,7 @@ public class BalanceController {
     public BalanceController(TextView balanceView, SharedPreferences balance) {
         this.balanceView = balanceView;
         this.balance = balance;
-        String balanceStr = balance.getInt("balance", 0) + "PLN";
+        String balanceStr = String.valueOf(balance.getInt("balance", 0));
         balanceView.setText(balanceStr);
     }
 
@@ -28,7 +28,7 @@ public class BalanceController {
             SharedPreferences.Editor editor = balance.edit();
             editor.putInt("balance", newBalance);
             editor.apply();
-            String balanceStr = balance.getInt("balance", 0) + "PLN";
+            String balanceStr = String.valueOf(balance.getInt("balance", 0));
             balanceView.setText(balanceStr);
     }
 
@@ -47,7 +47,7 @@ public class BalanceController {
         SharedPreferences.Editor editor = balance.edit();
         editor.putInt("balance", newBalance);
         editor.apply();
-        String balanceStr = balance.getInt("balance", 0) + "PLN";
+        String balanceStr = String.valueOf(balance.getInt("balance", 0));
         balanceView.setText(balanceStr);
 
     }

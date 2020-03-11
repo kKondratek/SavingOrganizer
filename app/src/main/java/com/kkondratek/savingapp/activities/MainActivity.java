@@ -36,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private EventBus bus = EventBus.getDefault();
     private TextView totalPriceView;
     private TextView balanceView;
+    private TextView currencyBalanceView;
+    private TextView currencyPriceView;
     private BalanceController balanceController;
+    private SharedPreferences sharedPreferences;
     public static final String preferencesName = "app_prefs";
 
 
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         pager.setAdapter(pagerAdapter);
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences(preferencesName,
+        sharedPreferences = this.getSharedPreferences(preferencesName,
                 Context.MODE_PRIVATE);
 
         balanceView = findViewById(R.id.text_view_balance);
@@ -75,6 +78,29 @@ public class MainActivity extends AppCompatActivity {
         mainTextViews.setBalanceView(balanceView);
         mainTextViews.setPriceView(totalPriceView);
 
+        sharedPreferences.registerOnSharedPreferenceChangeListener(
+                new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                String currency = " " + sharedPreferences.getString("currency", "");
+                currencyBalanceView = findViewById(R.id.text_view_balance_currency);
+                currencyPriceView = findViewById(R.id.text_view_price_currency);
+                currencyBalanceView.setText(currency);
+                currencyPriceView.setText(currency);
+            }
+        });
+
+
+        //currency setup
+        String currency = sharedPreferences.getString("currency", "");
+
+        if (currency.equals("")) {
+            openCurrencySettingsDialog();
+        } else {
+            updateCurrencyViews();
+        }
+
+
         addAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,10 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 closeKeyboard();
             }
         });
-
-        if (sharedPreferences.getString("currency", "").equals("")) {
-            openCurrencySettingsDialog();
-        }
     }
 
     @Override
@@ -127,6 +149,14 @@ public class MainActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
+    }
+
+    private void updateCurrencyViews() {
+        String currency = " " + sharedPreferences.getString("currency", "");
+        currencyBalanceView = findViewById(R.id.text_view_balance_currency);
+        currencyPriceView = findViewById(R.id.text_view_price_currency);
+        currencyBalanceView.setText(currency);
+        currencyPriceView.setText(currency);
     }
 
     private void openCurrencySettingsDialog() {

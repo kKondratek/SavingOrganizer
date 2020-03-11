@@ -21,14 +21,13 @@ public class CurrencySettingDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_currency_set, null);
+        final View view = inflater.inflate(R.layout.dialog_currency_set, null);
 
         builder.setView(view)
                 .setTitle(R.string.currency_setting_name)
         .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
             }
         })
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -36,7 +35,6 @@ public class CurrencySettingDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String currency = (String) currenceSpinner.getSelectedItem();
                         MainActivity.putStringPref("currency", currency, getActivity());
-                        System.out.println(MainActivity.getStringPref("currency", getActivity()));
                     }
                 });
 

@@ -18,7 +18,7 @@
             android:layout_gravity="top"
             android:background="@color/colorPrimary"
             android:fitsSystemWindows="true"
-            app:columnCount="4"
+            app:columnCount="5"
             app:orientation="vertical"
             app:rowCount="2">
 
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_monetization_on_black_24dp"
                 app:layout_column="0"
-                app:layout_columnWeight="1"
+                app:layout_columnWeight="0.5"
                 app:layout_row="0"
                 app:layout_rowWeight="1" />
 
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_shopping_cart_black_24dp"
                 app:layout_column="0"
-                app:layout_columnWeight="1"
+                app:layout_columnWeight="0.5"
                 app:layout_row="1"
                 app:layout_rowWeight="1" />
 
@@ -47,10 +47,11 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
+                app:layout_gravity="right"
                 app:layout_column="1"
                 app:layout_columnWeight="2"
                 app:layout_row="0"
-                app:layout_rowWeight="2" />
+                app:layout_rowWeight="1" />
 
             <TextView
                 android:id="@+id/text_view_total_price"
@@ -58,10 +59,33 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
+                app:layout_gravity="right"
                 app:layout_column="1"
                 app:layout_columnWeight="2"
                 app:layout_row="1"
-                app:layout_rowWeight="2" />
+                app:layout_rowWeight="1" />
+
+            <TextView
+                android:id="@+id/text_view_balance_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_column="2"
+                app:layout_columnWeight="1"
+                app:layout_row="0"
+                app:layout_rowWeight="1"/>
+
+            <TextView
+                android:id="@+id/text_view_price_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_column="2"
+                app:layout_columnWeight="1"
+                app:layout_row="1"
+                app:layout_rowWeight="1"/>
 
             <EditText
                 android:id="@+id/edit_text_amount"
@@ -72,7 +96,7 @@
                 android:inputType="numberDecimal"
                 android:textColorHint="@android:color/white"
                 app:boxBackgroundColor="@color/colorPrimaryDark"
-                app:layout_column="2"
+                app:layout_column="3"
                 app:layout_columnSpan="2"
                 app:layout_columnWeight="2"
                 app:layout_row="0"
