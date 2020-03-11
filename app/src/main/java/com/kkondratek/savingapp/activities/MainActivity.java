@@ -82,11 +82,13 @@ public class MainActivity extends AppCompatActivity {
                 new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                String currency = " " + sharedPreferences.getString("currency", "");
-                currencyBalanceView = findViewById(R.id.text_view_balance_currency);
-                currencyPriceView = findViewById(R.id.text_view_price_currency);
-                currencyBalanceView.setText(currency);
-                currencyPriceView.setText(currency);
+                if (key.equals("currency")) {
+                    String currency = " " + sharedPreferences.getString("currency", "");
+                    currencyBalanceView = findViewById(R.id.text_view_balance_currency);
+                    currencyPriceView = findViewById(R.id.text_view_price_currency);
+                    currencyBalanceView.setText(currency);
+                    currencyPriceView.setText(currency);
+                }
             }
         });
 
