@@ -3,7 +3,6 @@ package com.kkondratek.savingapp.activities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,7 +11,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.currency_settings:
-                Toast.makeText(this, "Action in progress", Toast.LENGTH_SHORT).show();
                 openCurrencySettingsDialog();
                 return true;
             default:
@@ -138,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void putStringPref(String key, String value, Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = context.getSharedPreferences(preferencesName, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(key, value);
         editor.apply();
@@ -152,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static String getStringPref(String key, Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences preferences = context.getSharedPreferences(preferencesName, MODE_PRIVATE);
         return preferences.getString(key, null);
     }
 
