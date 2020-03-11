@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
@@ -90,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if (sharedPreferences.getString("currency", "").equals("")) {
+            openCurrencySettingsDialog();
+        }
     }
 
     @Override
@@ -97,6 +103,18 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.currency_settings:
+                Toast.makeText(this, "Action in progress", Toast.LENGTH_SHORT).show();
+                openCurrencySettingsDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void onEvent(UpdateTextEvent event) {
@@ -112,6 +130,11 @@ public class MainActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
+    }
+
+    private void openCurrencySettingsDialog() {
+        CurrencySettingDialog currencySettingDialog = new CurrencySettingDialog();
+        currencySettingDialog.show(getSupportFragmentManager(), "Currency dialog");
     }
 
     public static void putStringPref(String key, String value, Context context) {

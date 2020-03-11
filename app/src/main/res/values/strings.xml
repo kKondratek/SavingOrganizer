@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Saving App</string>
     <string name="currency_setting_name">Change currency</string>
+    <string name="currency_dialog_text">Choose your currency: </string>
+    <string-array name="currencies">
+        <item>PLN</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>CHF</item>
+        <item>SEK</item>
+        <item>AUD</item>
+        <item>CAD</item>
+        <item>CZK</item>
+        <item>JPY</item>
+        <item>RUB</item>
+        <item>MXN</item>
+    </string-array>
 </resources>
