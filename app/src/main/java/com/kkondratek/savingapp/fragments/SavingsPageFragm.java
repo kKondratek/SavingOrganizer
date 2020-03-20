@@ -32,6 +32,14 @@ public class SavingsPageFragm extends Fragment {
 
     private SavingViewModel savingViewModel;
 
+    public SavingsPageFragm() {
+
+    }
+
+    public static SavingsPageFragm newInstance() {
+        SavingsPageFragm savingsPageFragm= new SavingsPageFragm();
+        return savingsPageFragm;
+    }
 
     @Nullable
     @Override

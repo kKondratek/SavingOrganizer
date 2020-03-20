@@ -15,16 +15,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.kkondratek.savingapp.R;
 import com.kkondratek.savingapp.fragments.GoalsPageFragm;
 import com.kkondratek.savingapp.fragments.SavingsPageFragm;
 import com.kkondratek.savingapp.logic.BalanceController;
 import com.kkondratek.savingapp.logic.MainTextViews;
-import com.kkondratek.savingapp.logic.SlidePagerAdapter;
 import com.kkondratek.savingapp.logic.UpdateTextEvent;
+import com.kkondratek.savingapp.logic.ViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView balanceView;
     private TextView currencyBalanceView;
     private TextView currencyPriceView;
+    private TextView savingsTabView;
+    private TextView goalsTabView;
     private BalanceController balanceController;
     private SharedPreferences sharedPreferences;
+    private TabLayout tabLayout;
     public static final String preferencesName = "app_prefs";
 
 
@@ -55,10 +59,23 @@ public class MainActivity extends AppCompatActivity {
         pageList.add(savingsPageFragm);
         pageList.add(goalsPageFragm);
 
-        ViewPager pager = findViewById(R.id.viewPager);
-        PagerAdapter pagerAdapter = new SlidePagerAdapter(getSupportFragmentManager(), pageList);
+        final ViewPager2 pager = findViewById(R.id.view_pager);
+                //new ViewPagerAdapter(getSupportFragmentManager(), pageList);
 
-        pager.setAdapter(pagerAdapter);
+        tabLayout = findViewById(R.id.tab_layout);
+        pager.setAdapter(createCardAdapter());
+
+        new TabLayoutMediator(tabLayout, pager,
+                new TabLayoutMediator.TabConfigurationStrategy() {
+                    @Override public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                        if (position == 0) {
+                            tab.setText(R.string.savings);
+                        } else {
+                            tab.setText(R.string.goals);
+                        }
+                    }
+                }).attach();
+
 
         sharedPreferences = this.getSharedPreferences(preferencesName,
                 Context.MODE_PRIVATE);
@@ -166,7 +183,12 @@ public class MainActivity extends AppCompatActivity {
         currencySettingDialog.show(getSupportFragmentManager(), "Currency dialog");
     }
 
-    public static void putStringPref(String key, String value, Context context) {
+    private ViewPagerAdapter createCardAdapter() {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
+        return adapter;
+    }
+
+        public static void putStringPref(String key, String value, Context context) {
         SharedPreferences prefs = context.getSharedPreferences(preferencesName, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(key, value);

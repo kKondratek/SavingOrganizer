@@ -40,6 +40,14 @@ public class GoalsPageFragm extends Fragment {
 
     private EventBus bus = EventBus.getDefault();
 
+    public GoalsPageFragm() {
+
+    }
+
+    public static GoalsPageFragm newInstance() {
+        return new GoalsPageFragm();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater,

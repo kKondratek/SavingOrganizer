@@ -2,6 +2,8 @@
     <string name="app_name">Saving App</string>
     <string name="currency_setting_name">Change currency</string>
     <string name="currency_dialog_text">Choose your currency: </string>
+    <string name="savings">savings</string>
+    <string name="goals">goals</string>
     <string-array name="currencies">
         <item>PLN</item>
         <item>USD</item>

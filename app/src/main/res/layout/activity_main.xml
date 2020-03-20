@@ -133,55 +133,72 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.bottomappbar.BottomAppBar
-                android:id="@+id/bottomBar"
-                style="@style/Widget.MaterialComponents.BottomAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom"
-                app:backgroundTint="@color/colorPrimary"
-                app:fabAlignmentMode="center"
-                app:fabCradleMargin="10dp"
-                app:fabCradleRoundedCornerRadius="10dp"
-                app:fabCradleVerticalOffset="5dp"
-                app:hideOnScroll="true">
+<!--            <com.google.android.material.bottomappbar.BottomAppBar-->
+<!--                android:id="@+id/bottomBar"-->
+<!--                style="@style/Widget.MaterialComponents.BottomAppBar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                app:backgroundTint="@color/colorPrimary"-->
+<!--                app:fabAlignmentMode="center"-->
+<!--                app:fabCradleMargin="10dp"-->
+<!--                app:fabCradleRoundedCornerRadius="10dp"-->
+<!--                app:fabCradleVerticalOffset="5dp"-->
+<!--                app:hideOnScroll="true">-->
 
-                <LinearLayout
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
+                    android:layout_gravity="bottom"
+                    app:tabMaxWidth="0dp"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed"
+                    app:tabRippleColor="@color/colorPrimaryDark"
+                    />
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginRight="20dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:weightSum="10">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:gravity="start"
-                        android:text="Savings"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/savings_tab"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="5"-->
+<!--                        android:gravity="start"-->
+<!--                        android:text="Savings"-->
+<!--                        android:textColor="#ffffff"-->
+<!--                        android:textSize="20sp"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true" />-->
+<!--                    -->
+<!--                    <TextView-->
+<!--                        android:id="@+id/goals_tab"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="5"-->
+<!--                        android:gravity="end"-->
+<!--                        android:text="Goals"-->
+<!--                        android:textColor="#ffffff"-->
+<!--                        android:textSize="20sp"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true"/>-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:gravity="end"
-                        android:text="Goals"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp" />
+<!--                </LinearLayout>-->
 
-                </LinearLayout>
-
-            </com.google.android.material.bottomappbar.BottomAppBar>
+<!--            </com.google.android.material.bottomappbar.BottomAppBar>-->
 
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/topGrid"
