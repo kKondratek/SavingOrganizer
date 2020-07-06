@@ -59,7 +59,7 @@ public class SavingsPageFragm extends Fragment {
         recyclerView.setAdapter(savingAdapter);
 
         savingViewModel = ViewModelProviders.of(this).get(SavingViewModel.class);
-        savingViewModel.getAllSavings().observe(this, new Observer<List<Saving>>() {
+        savingViewModel.getAllSavings().observe(getViewLifecycleOwner(), new Observer<List<Saving>>() {
             @Override
             public void onChanged(List<Saving> savings) {
                 savingAdapter.setSavings(savings);

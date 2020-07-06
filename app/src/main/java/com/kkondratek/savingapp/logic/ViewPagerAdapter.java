@@ -11,19 +11,22 @@ import com.kkondratek.savingapp.fragments.SavingsPageFragm;
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
     private static final int CARD_ITEM_SIZE = 2;
-
+    private Fragment savingsPageFragm;
+    private Fragment goalsPageFragm;
 
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
+        savingsPageFragm = SavingsPageFragm.newInstance();
+        goalsPageFragm = GoalsPageFragm.newInstance();
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         if (position == 0) {
-            return SavingsPageFragm.newInstance();
+            return this.savingsPageFragm;
         } else {
-            return GoalsPageFragm.newInstance();
+            return this.goalsPageFragm;
         }
     }
 

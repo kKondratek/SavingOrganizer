@@ -15,14 +15,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.kkondratek.savingapp.R;
+import com.kkondratek.savingapp.data.Goal;
 import com.kkondratek.savingapp.fragments.GoalsPageFragm;
 import com.kkondratek.savingapp.fragments.SavingsPageFragm;
 import com.kkondratek.savingapp.logic.BalanceController;
+import com.kkondratek.savingapp.logic.GoalViewModel;
 import com.kkondratek.savingapp.logic.MainTextViews;
 import com.kkondratek.savingapp.logic.UpdateTextEvent;
 import com.kkondratek.savingapp.logic.ViewPagerAdapter;
@@ -60,14 +64,15 @@ public class MainActivity extends AppCompatActivity {
         pageList.add(goalsPageFragm);
 
         final ViewPager2 pager = findViewById(R.id.view_pager);
-                //new ViewPagerAdapter(getSupportFragmentManager(), pageList);
+        //new ViewPagerAdapter(getSupportFragmentManager(), pageList);
 
         tabLayout = findViewById(R.id.tab_layout);
         pager.setAdapter(createCardAdapter());
 
         new TabLayoutMediator(tabLayout, pager,
                 new TabLayoutMediator.TabConfigurationStrategy() {
-                    @Override public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                    @Override
+                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                         if (position == 0) {
                             tab.setText(R.string.savings);
                         } else {
@@ -95,19 +100,21 @@ public class MainActivity extends AppCompatActivity {
         mainTextViews.setBalanceView(balanceView);
         mainTextViews.setPriceView(totalPriceView);
 
+        initializeTotalPrice();
+
         sharedPreferences.registerOnSharedPreferenceChangeListener(
                 new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                if (key.equals("currency")) {
-                    String currency = " " + sharedPreferences.getString("currency", "");
-                    currencyBalanceView = findViewById(R.id.text_view_balance_currency);
-                    currencyPriceView = findViewById(R.id.text_view_price_currency);
-                    currencyBalanceView.setText(currency);
-                    currencyPriceView.setText(currency);
-                }
-            }
-        });
+                    @Override
+                    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                        if (key.equals("currency")) {
+                            String currency = " " + sharedPreferences.getString("currency", "");
+                            currencyBalanceView = findViewById(R.id.text_view_balance_currency);
+                            currencyPriceView = findViewById(R.id.text_view_price_currency);
+                            currencyBalanceView.setText(currency);
+                            currencyPriceView.setText(currency);
+                        }
+                    }
+                });
 
 
         //currency setup
@@ -188,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         return adapter;
     }
 
-        public static void putStringPref(String key, String value, Context context) {
+    public static void putStringPref(String key, String value, Context context) {
         SharedPreferences prefs = context.getSharedPreferences(preferencesName, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(key, value);
@@ -210,6 +217,30 @@ public class MainActivity extends AppCompatActivity {
     public static int getIntPref(String key, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(preferencesName, MODE_PRIVATE);
         return preferences.getInt(key, 0);
+    }
+
+    /**
+     * Initializes Goal data and assigns total price value
+     */
+    private void initializeTotalPrice() {
+        final GoalViewModel goalViewModel = ViewModelProviders.of(this).get(GoalViewModel.class);
+        goalViewModel.getAllGoals().observe(this, new Observer<List<Goal>>() {
+                    @Override
+                    public void onChanged(List<Goal> goals) {
+                        int totalPrice = 0;
+                        System.out.println("MainActivity price");
+                        if (goals.size() > 0) {
+                            for (Goal goal : goals) {
+                                System.out.println(goal.toString());
+                                totalPrice += Integer.parseInt(goal.getPrice());
+                            }
+                        }
+                        totalPriceView.setText(String.valueOf(totalPrice));
+                        goalViewModel.getAllGoals().removeObserver(this);
+                    }
+                }
+        );
+
     }
 
 }

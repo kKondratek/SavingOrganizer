@@ -25,11 +25,11 @@ public class BalanceController {
                     .getInt("balance", 0)
                     + Integer.parseInt(editText.getText().toString());
         }
-            SharedPreferences.Editor editor = balance.edit();
-            editor.putInt("balance", newBalance);
-            editor.apply();
-            String balanceStr = String.valueOf(balance.getInt("balance", 0));
-            balanceView.setText(balanceStr);
+        SharedPreferences.Editor editor = balance.edit();
+        editor.putInt("balance", newBalance);
+        editor.apply();
+        String balanceStr = String.valueOf(balance.getInt("balance", 0));
+        balanceView.setText(balanceStr);
     }
 
     public void substractAmount(EditText editText) {
