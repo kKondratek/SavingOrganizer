@@ -8,13 +8,13 @@ public class MainTextViews {
     private TextView priceView;
     private static MainTextViews instance;
 
-    private MainTextViews () {
+    private MainTextViews() {
     }
 
     public static MainTextViews instance() {
         if (instance == null) {
             instance = new MainTextViews();
-       }
+        }
         return instance;
     }
 

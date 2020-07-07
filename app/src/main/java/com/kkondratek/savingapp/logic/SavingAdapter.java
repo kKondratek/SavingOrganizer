@@ -22,7 +22,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.SavingHold
     @Override
     public SavingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.saving_item, parent,false);
+                .inflate(R.layout.saving_item, parent, false);
         return new SavingHolder(itemView);
     }
 
@@ -43,7 +43,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.SavingHold
                 ord = "rd";
                 break;
             default:
-                ord = "sh";
+                ord = "th";
                 break;
         }
 

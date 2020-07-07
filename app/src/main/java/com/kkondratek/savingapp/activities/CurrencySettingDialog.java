@@ -14,7 +14,7 @@ import com.kkondratek.savingapp.R;
 
 public class CurrencySettingDialog extends AppCompatDialogFragment {
 
-    private Spinner currenceSpinner;
+    private Spinner currencySpinner;
 
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
@@ -25,20 +25,20 @@ public class CurrencySettingDialog extends AppCompatDialogFragment {
 
         builder.setView(view)
                 .setTitle(R.string.currency_setting_name)
-        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String currency = (String) currenceSpinner.getSelectedItem();
+                        String currency = (String) currencySpinner.getSelectedItem();
                         MainActivity.putStringPref("currency", currency, getActivity());
                     }
                 });
 
-        currenceSpinner = view.findViewById(R.id.currency_settings);
+        currencySpinner = view.findViewById(R.id.currency_settings);
 
         return builder.create();
     }

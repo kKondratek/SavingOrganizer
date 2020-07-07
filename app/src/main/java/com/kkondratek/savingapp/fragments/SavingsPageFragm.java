@@ -63,7 +63,6 @@ public class SavingsPageFragm extends Fragment {
             @Override
             public void onChanged(List<Saving> savings) {
                 savingAdapter.setSavings(savings);
-
             }
         });
 

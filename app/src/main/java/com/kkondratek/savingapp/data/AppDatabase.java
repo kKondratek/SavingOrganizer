@@ -47,12 +47,8 @@ public abstract class AppDatabase extends RoomDatabase {
             savingDao = db.savingDao();
         }
 
-
         @Override
         protected Void doInBackground(Void... voids) {
-            goalDao.insert(new Goal("Name 1", "100.00",  "some details"));
-            goalDao.insert(new Goal("Name 2", "1500.00",  "some details"));
-
             return null;
         }
     }

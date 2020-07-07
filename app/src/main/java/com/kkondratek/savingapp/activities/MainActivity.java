@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
         //currency setup
         String currency = sharedPreferences.getString("currency", "");
 

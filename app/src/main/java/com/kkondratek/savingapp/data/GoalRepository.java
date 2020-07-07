@@ -13,7 +13,6 @@ public class GoalRepository {
 
     private LiveData<List<Goal>> goals;
 
-
     public GoalRepository(Application application) {
         AppDatabase database = AppDatabase.getInstance(application);
         goalDao = database.goalDao();
@@ -25,11 +24,9 @@ public class GoalRepository {
     }
 
 
-
     public void update(Goal goal) {
         new UpdateGoalAsyncTask(goalDao).execute(goal);
     }
-
 
 
     public void delete(Goal goal) {
@@ -37,11 +34,9 @@ public class GoalRepository {
     }
 
 
-
     public void deleteAllGoals() {
         new DeleteAllGoalsAsyncTask(goalDao).execute();
     }
-
 
 
     public LiveData<List<Goal>> getAllGoals() {
@@ -55,6 +50,7 @@ public class GoalRepository {
         private InsertGoalAsyncTask(GoalDao goalDao) {
             this.goalDao = goalDao;
         }
+
         @Override
         protected Void doInBackground(Goal... goals) {
             goalDao.insert(goals[0]);
@@ -68,6 +64,7 @@ public class GoalRepository {
         private UpdateGoalAsyncTask(GoalDao goalDao) {
             this.goalDao = goalDao;
         }
+
         @Override
         protected Void doInBackground(Goal... goals) {
             goalDao.update(goals[0]);
@@ -81,6 +78,7 @@ public class GoalRepository {
         private DeleteGoalAsyncTask(GoalDao goalDao) {
             this.goalDao = goalDao;
         }
+
         @Override
         protected Void doInBackground(Goal... goals) {
             goalDao.delete(goals[0]);
@@ -94,6 +92,7 @@ public class GoalRepository {
         private DeleteAllGoalsAsyncTask(GoalDao goalDao) {
             this.goalDao = goalDao;
         }
+
         @Override
         protected Void doInBackground(Void... voids) {
             goalDao.deleteAllGoals();

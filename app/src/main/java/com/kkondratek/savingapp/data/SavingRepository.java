@@ -45,6 +45,7 @@ public class SavingRepository {
         private InsertSavingAsyncTask(SavingDao savingDao) {
             this.savingDao = savingDao;
         }
+
         @Override
         protected Void doInBackground(Saving... savings) {
             savingDao.insert(savings[0]);
@@ -58,6 +59,7 @@ public class SavingRepository {
         private UpdateSavingAsyncTask(SavingDao savingDao) {
             this.savingDao = savingDao;
         }
+
         @Override
         protected Void doInBackground(Saving... savings) {
             savingDao.update(savings[0]);
@@ -71,6 +73,7 @@ public class SavingRepository {
         private DeleteSavingAsyncTask(SavingDao savingDao) {
             this.savingDao = savingDao;
         }
+
         @Override
         protected Void doInBackground(Saving... savings) {
             savingDao.delete(savings[0]);
@@ -84,6 +87,7 @@ public class SavingRepository {
         private DeleteAllSavingsAsyncTask(SavingDao savingDao) {
             this.savingDao = savingDao;
         }
+
         @Override
         protected Void doInBackground(Void... voids) {
             savingDao.deleteAllSavings();

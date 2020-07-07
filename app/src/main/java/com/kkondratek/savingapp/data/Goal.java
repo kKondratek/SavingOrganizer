@@ -3,8 +3,6 @@ package com.kkondratek.savingapp.data;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.math.BigDecimal;
-
 @Entity(tableName = "goals")
 public class Goal {
 
@@ -43,7 +41,7 @@ public class Goal {
     }
 
     public void setPrice(String price) {
-        this.price =price;
+        this.price = price;
     }
 
     public int getPriority() {
@@ -62,6 +60,8 @@ public class Goal {
         this.details = details;
     }
 
-    public int getId() {return id;}
+    public int getId() {
+        return id;
+    }
 }
 

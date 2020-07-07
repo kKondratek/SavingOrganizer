@@ -13,23 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
-        android:inputType="text"/>
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edit_text_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Details"
-        android:lines="5"
-        android:inputType="textMultiLine"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="1dp"/>
+        android:layout_marginBottom="1dp"
+        android:hint="Details"
+        android:inputType="textMultiLine"
+        android:lines="5" />
 
     <EditText
         android:id="@+id/edit_text_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Price"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal" />
 
 </LinearLayout>

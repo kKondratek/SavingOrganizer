@@ -46,10 +46,14 @@ public class Saving {
     public void setMonthDay(int monthDay) {
         this.monthDay = monthDay;
     }
+
     public void setMonthDay(String monthDay) {
         this.monthDay = Integer.parseInt(monthDay);
     }
-    public int getId() {return id;}
+
+    public int getId() {
+        return id;
+    }
 
     public void setId(int id) {
         this.id = id;
