@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -21,7 +22,8 @@ public class CurrencySettingDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View view = inflater.inflate(R.layout.dialog_currency_set, null);
+        final View view = inflater.inflate(R.layout.dialog_currency_set,
+                new LinearLayout(getContext()), false);
 
         builder.setView(view)
                 .setTitle(R.string.currency_setting_name)

@@ -176,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Updates all views linked with currency
+     */
     private void updateCurrencyViews() {
         String currency = " " + sharedPreferences.getString("currency", "");
         currencyBalanceView = findViewById(R.id.text_view_balance_currency);
