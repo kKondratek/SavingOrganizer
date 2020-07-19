@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                         if (key.equals("currency")) {
-                            String currency = " " + sharedPreferences.getString("currency", "");
+                            String currency = " " + sharedPreferences.getString("currency",
+                                    "");
                             currencyBalanceView = findViewById(R.id.text_view_balance_currency);
                             currencyPriceView = findViewById(R.id.text_view_price_currency);
                             currencyBalanceView.setText(currency);
@@ -152,13 +153,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.currency_settings:
-                openCurrencySettingsDialog();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.currency_settings) {
+            openCurrencySettingsDialog();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onEvent(UpdateTextEvent event) {
@@ -185,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
         currencyPriceView = findViewById(R.id.text_view_price_currency);
         currencyBalanceView.setText(currency);
         currencyPriceView.setText(currency);
+        //TODO update currency
+
     }
 
     private void openCurrencySettingsDialog() {
@@ -242,7 +243,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-
     }
 
 }

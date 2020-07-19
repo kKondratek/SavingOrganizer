@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.kkondratek.savingapp.R;
@@ -18,6 +19,7 @@ public class CurrencySettingDialog extends AppCompatDialogFragment {
     private Spinner currencySpinner;
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 

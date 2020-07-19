@@ -30,9 +30,20 @@
             android:id="@+id/text_view_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="false"
+            android:layout_toLeftOf="@id/text_view_currency"
+            android:text="150"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginRight="15px" />
+
+        <TextView
+            android:id="@+id/text_view_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="150 PLN"
+            android:layout_alignParentRight="false"
+            android:text="@string/currency"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
